@@ -6,6 +6,8 @@ class Repository:
         self.repopath = repopath
         self.githublink = 'https://github.com/'+repopath
         self.apilink = 'https://api.github.com/repos/' + repopath
+        self.repoinfoJSON = self.getRepInfoasJSON
+        self.forkedrepos = {}
 
     def scrapeRepoInfo(self,link):
         repohtml = requests.get(link).text
@@ -16,8 +18,8 @@ class Repository:
         return diff_info_line
 
     def getRepInfoasJSON(self):
-        self.repoinfoJSON = requests.get(self.apilink).json()
-        return self.repoinfoJSON
+        return requests.get(self.apilink).json()
+        #return self.repoinfoJSON
 
     def getForkedRepos(self):
         forkedrespjson = requests.get(self.apilink+'/forks')
@@ -28,6 +30,6 @@ class Repository:
 
 
 
-repo = Repository('gcushen/hugo-academic')
-print("No of forks of main repo :" , repo.getRepInfoasJSON()['forks_count'])    
-print(repo.getForkedRepos())   
+#repo = Repository('gcushen/hugo-academic')
+#print("No of forks of main repo :" , repo.getRepInfoasJSON()['forks_count'])    
+#print(repo.getForkedRepos())   
