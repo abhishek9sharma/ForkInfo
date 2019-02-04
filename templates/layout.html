@@ -6,7 +6,7 @@
     <body>
         <h1>{% block heading %}{% endblock %}</h1>
         <form action="{{url_for('displayforks')}}" method="post">
-            <input type="text" name="repo" placeholder="Enter the GitHub repo to find the active forums">
+            <input type="text" name="repo" placeholder="username/repositoryname">
             <button>Find Forks</button>
         </form>
         {% block body %}
