@@ -1,16 +1,29 @@
-from flask import Flask
+from flask import Flask, render_template,request
 from flask_session import Session
 from GitHubRepo import Repository as repo
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 @app.route("/")
 def index():
-    return "Enter the repository name in the format username/repo"
+    return render_template('index.html')
 
-@app.route('/<string:reponame>')
+
+@app.route('/<path:reponame>', methods =['GET','POST'])
 def forkedrepos(reponame):
-    print(reponame)
-    return f"{reponame}, has been forked"
+    #print(reponame)
     #repoinput = repo(reponame)
-    #return f"{reponame}, has been forked" + str(repoinput.repoinfoJSON['forks_count']) +" times "
+    #forked_count = repoinput.repoinfoJSON['forks_count']
+    #return f"{reponame}, has been forked, {forked_count}, times "
+    if request.method=='GET':
+        return f"<h1>Finding forks for :{reponame}</h1>"
+    else:
+        reponame = request.form.get('name')
+        return f"<h1>Finding forks for :{reponame}</h1>"
+
+
+@app.route('/displayforks')
+def displayforks():
+    return render_template('forks.html')
+    

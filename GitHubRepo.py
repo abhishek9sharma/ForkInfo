@@ -6,7 +6,7 @@ class Repository:
         self.repopath = repopath
         self.githublink = 'https://github.com/'+repopath
         self.apilink = 'https://api.github.com/repos/' + repopath
-        self.repoinfoJSON = self.getRepInfoasJSON
+        self.repoinfoJSON = self.getRepInfoasJSON()
         self.forkedrepos = {}
 
     def scrapeRepoInfo(self,link):
