@@ -1,3 +1,6 @@
 from GitHubRepo import Repository as repo
-repoinput = repo('abhishek9sharma/EASE17Scripts')
-print(repoinput.repoinfoJSON['forks_count'])
+repoobj = repo('abhishek9sharma/EASE17Scripts')
+print(repoobj.repoinfoJSON['forks_count'])
+forked_repos = repoobj.getForkedRepos()
+for k in repoobj.commitinfo:
+    print(repoobj.commitinfo[k])

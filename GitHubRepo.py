@@ -6,8 +6,9 @@ class Repository:
         self.repopath = repopath
         self.githublink = 'https://github.com/'+repopath
         self.apilink = 'https://api.github.com/repos/' + repopath
-        self.repoinfoJSON = self.getRepInfoasJSON()
-        self.forkedrepos = {}
+        self.repoinfoJSON = self.getRepInfoasJSON() 
+        self.forked_count = self.repoinfoJSON['forks_count']
+    
 
     def scrapeRepoInfo(self,link):
         repohtml = requests.get(link).text
@@ -22,11 +23,11 @@ class Repository:
         #return self.repoinfoJSON
 
     def getForkedRepos(self):
-        forkedrespjson = requests.get(self.apilink+'/forks')
-        
-        for repoinfo in forkedrespjson.json():
+        self.forkedrespjson = requests.get(self.apilink+'/forks')
+        self.commitinfo ={}
+        for repoinfo in self.forkedrespjson.json():
             reponame = repoinfo['full_name']
-            print(reponame, " : ",  self.scrapeRepoInfo('https://github.com/' + reponame))
+            self.commitinfo[reponame]= self.scrapeRepoInfo('https://github.com/' + reponame)
 
 
 

@@ -5,9 +5,10 @@
     </head>
     <body>
         <h1>{% block heading %}{% endblock %}</h1>
-        <form action="{{url_for('displayforks')}}" method="post">
+        <form action="{{url_for('forks')}}" method="post">
             <input type="text" name="repo" placeholder="username/repositoryname">
-            <button>Find Forks</button>
+            <!--<button>Find Forks</button>-->
+            <input type = "submit" value = "Find Forks" />
         </form>
         {% block body %}
         {% endblock %}   
