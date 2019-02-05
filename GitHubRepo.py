@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from lxml import etree
 
 class Repository:
     def __init__(self,repopath):
