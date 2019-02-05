@@ -1,9 +1,16 @@
 {% extends "layout.html" %}
 
 {% block heading %}
-    forks
 {% endblock %}
 
 {% block body %}
-   forks 
+<p>
+<table border = 1>
+    {% for repo in cuur_repo_list %}
+       <tr>
+          <th> {{ repo }} </th>
+          <td> {{ cuur_repo_list[repo] }} </td>
+       </tr>
+    {% endfor %}
+ </table>
 {% endblock %}

@@ -2,13 +2,14 @@ import requests
 from bs4 import BeautifulSoup
 from lxml import etree
 
+
 class Repository:
     def __init__(self,repopath):
         self.repopath = repopath
         self.githublink = 'https://github.com/'+repopath
         self.apilink = 'https://api.github.com/repos/' + repopath
         self.repoinfoJSON = self.getRepInfoasJSON() 
-        self.forked_count = self.repoinfoJSON['forks_count']
+        #self.forked_count = self.repoinfoJSON['forks_count']
     
 
     def scrapeRepoInfo(self,link):
@@ -24,9 +25,9 @@ class Repository:
         #return self.repoinfoJSON
 
     def getForkedRepos(self):
-        self.forkedrespjson = requests.get(self.apilink+'/forks')
+        self.forkedrespjson = requests.get(self.apilink+'/forks').json()
         self.commitinfo ={}
-        for repoinfo in self.forkedrespjson.json():
+        for repoinfo in self.forkedrespjson:
             reponame = repoinfo['full_name']
             self.commitinfo[reponame]= self.scrapeRepoInfo('https://github.com/' + reponame)
 

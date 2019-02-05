@@ -14,11 +14,11 @@ def index():
 def forkedrepos(reponame):
     repoobj = repo(reponame)
     forked_repos = repoobj.getForkedRepos()
-    info = ''
-    for k in repoobj.commitinfo:
-        info += '<p>' +str(k) + '::' + repoobj.commitinfo[k] +'</p>'
-    return info
-    
+    # info = ''
+    # for k in repoobj.commitinfo:
+    #     info += '<p>' +str(k) + '::' + repoobj.commitinfo[k] +'</p>'
+    # return info
+    return render_template('forks.html', cuur_repo_list= repoobj.commitinfo)
 
 @app.route('/forks', methods =['GET','POST'])
 def forks():
