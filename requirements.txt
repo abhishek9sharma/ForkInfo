@@ -3,3 +3,4 @@ lxml==4.1.0
 Flask_Session==0.3.1
 requests==2.18.4
 beautifulsoup4==4.7.1
+gunicorn==19.9.0
