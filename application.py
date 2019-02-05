@@ -16,7 +16,7 @@ def forkedrepos(reponame):
     forked_repos = repoobj.getForkedRepos()
     info = ''
     for k in repoobj.commitinfo:
-        info += repoobj.commitinfo[k]
+        info += '<p>' +str(k) + '::' + repoobj.commitinfo[k] +'</p>'
     return info
     
 
