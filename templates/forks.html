@@ -9,7 +9,9 @@
     {% for repo in cuur_repo_list %}
        <tr>
           <th> {{ repo }} </th>
-          <td> {{ cuur_repo_list[repo] }} </td>
+          <td> {{ cuur_repo_list[repo]['ahead'] }} </td>
+          <td> {{ cuur_repo_list[repo]['behind'] }} </td>
+  
        </tr>
     {% endfor %}
  </table>

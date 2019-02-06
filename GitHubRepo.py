@@ -18,7 +18,11 @@ class Repository:
         diffinfo = reposoup.find('div', attrs={'class': 'branch-infobar'})
         #forkinfo = reposoup.find()
         diff_info_line = diffinfo.contents[-1].strip()
-        return diff_info_line
+        commitinfodict ={'ahead':0, 'behind':0}
+        for infokey in commitinfodict:
+            if str(infokey) in diff_info_line:
+                commitinfodict[infokey] = diff_info_line.split(infokey)[0].split()[-2]        
+        return commitinfodict
 
     def getRepInfoasJSON(self):
         return requests.get(self.apilink).json()
