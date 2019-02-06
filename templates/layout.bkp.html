@@ -1,0 +1,18 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}
+    Forks for a GitHub repository
+{% endblock %}
+
+{% block body %}
+<p>
+    <form action="{{url_for('forks')}}" method="post">
+        <input type="text" name="repo" placeholder="username/repositoryname">
+        <!--<button>Find Forks</button>-->
+        <input type = "submit" value = "Find Forks" />
+    </form>
+    {% block app_content %}
+    {% endblock %}
+{% endblock %}
+
+
+

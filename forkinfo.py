@@ -1,9 +1,11 @@
 from flask import Flask, render_template,request,url_for,redirect
-from flask_session import Session
+from flask_bootstrap import Bootstrap
 from GitHubRepo import Repository as repo
+import random
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
+Bootstrap(app)
+#app.url_map.strict_slashes = False
 
 @app.route("/")
 def index():
@@ -12,14 +14,15 @@ def index():
 
 @app.route('/<path:reponame>')
 def forkedrepos(reponame):
+    #commitinfodict ={}
+    # for i in range(30):
+    #     commitinfodict['repo'+str(random.randint(1,101))] = {'ahead': random.randint(1,101) , 'behind': random.randint(1,101)}
+    #return render_template('forks.html', cuur_repo_list= commitinfodict)
     repoobj = repo(reponame)
     forked_repos = repoobj.getForkedRepos()
-    # info = ''
-    # for k in repoobj.commitinfo:
-    #     info += '<p>' +str(k) + '::' + repoobj.commitinfo[k] +'</p>'
-    # return info
+    print(repoobj.commitinfo)
     return render_template('forks.html', cuur_repo_list= repoobj.commitinfo)
-
+ 
 @app.route('/forks', methods =['GET','POST'])
 def forks():
     if(request.method == "GET"):

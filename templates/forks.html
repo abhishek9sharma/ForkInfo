@@ -1,18 +1,24 @@
 {% extends "layout.html" %}
-
-{% block heading %}
-{% endblock %}
-
 {% block body %}
-<p>
-<table border = 1>
-    {% for repo in cuur_repo_list %}
-       <tr>
-          <th> {{ repo }} </th>
-          <td> {{ cuur_repo_list[repo]['ahead'] }} </td>
-          <td> {{ cuur_repo_list[repo]['behind'] }} </td>
-  
-       </tr>
-    {% endfor %}
- </table>
+
+<div class="respnsive">
+   <table id="forkTable" class = "table display">
+      <thead>
+         <tr>
+               <th> Repository Name</th>
+               <th> Commits Ahead</th>
+               <th> Commits behind</th>
+         </tr>
+      <thead>
+      <tbody>
+       {% for repo in cuur_repo_list %}
+          <tr>
+             <td> {{ repo }} </td>
+             <td> {{ cuur_repo_list[repo]['ahead'] }} </td>
+             <td> {{ cuur_repo_list[repo]['behind'] }} </td>
+            </tr>
+       {% endfor %}
+      </tbody><tbody>
+   </table>
+</div>
 {% endblock %}
