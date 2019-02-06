@@ -1,10 +1,8 @@
 from flask import Flask, render_template,request,url_for,redirect
-from flask_bootstrap import Bootstrap
 from GitHubRepo import Repository as repo
 import random
 
 app = Flask(__name__)
-Bootstrap(app)
 #app.url_map.strict_slashes = False
 
 @app.route("/")
@@ -20,7 +18,6 @@ def forkedrepos(reponame):
     #return render_template('forks.html', cuur_repo_list= commitinfodict)
     repoobj = repo(reponame)
     forked_repos = repoobj.getForkedRepos()
-    print(repoobj.commitinfo)
     return render_template('forks.html', cuur_repo_list= repoobj.commitinfo)
  
 @app.route('/forks', methods =['GET','POST'])
