@@ -1,7 +1,7 @@
 from GitHubRepo import Repository as repo
 import json
-repoobj = repo('abhishek9sharma/EASE17Scripts')
-#repoobj = repo('gcushen/hugo-academic')
+#repoobj = repo('abhishek9sharma/EASE17Scripts')
+repoobj = repo('gcushen/hugo-academic')
 #print(repoobj.forked_count)
 repoobj.getForkedRepos()
 #print(repoobj.forkedrespjson)
