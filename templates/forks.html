@@ -10,10 +10,12 @@
               <th> Created At</th>
               <th> Updated At</th>
               <th> Commits ahead</th>
+              <th> Files ahead</th>
+
               <th> Commits behind</th>
-              <th> Comparison Link</th>
-             
- 
+              <th> Files behind</th>
+
+              <!-- <th> Comparison Link</th>-->
               <th> Stargazers Count</th>
               <th> Watchers Count</th>
               <th> Forks Count</th>  
@@ -27,13 +29,28 @@
              <td> <a href ="https://github.com/{{repo['full_name']}}">{{ repo['full_name'] }}</a></td>             
              <td> {{ repo['created_at'] }} </td>
              <td> {{ repo['updated_at'] }} </td>
-             <td> {{ repo['ahead'] }} </td>
-             <td> {{ repo['behind'] }} </td>
-               {% if repo['ahead']==-1 or repo['behind']==-1 %}
+        
+             {% if repo['ahead']==-1 or repo['files_ahead']==-1 %}
+               <td>Error Occured</td>
+               <td>Error Occured</td>   
+            {% else %}
+            <td> <a href ="https://github.com/{{parent_user}}/{{repo['name']}}/compare/master...{{repo['owner']['login']}}:master">{{ repo['ahead'] }} </a></td>
+            <td> <a href ="https://github.com/{{parent_user}}/{{repo['name']}}/compare/master...{{repo['owner']['login']}}:master">{{ repo['files_ahead'] }}</a> </td>
+ 
+             {% endif %}
+         
+               
+            {% if repo['behind']==-1 or repo['files_behind']==-1 %}
                   <td>Error Occured</td>
+                  <td>Error Occured</td>            
                {% else %}
-                  <td> <a href ="https://github.com/{{repo['full_name']}}/compare/master...{{parent_user}}:master">Detailed Comparison</a></td>
+               <td> <a href ="https://github.com/{{repo['full_name']}}/compare/master...{{parent_user}}:master">{{ repo['behind'] }} </a></td>
+               <td> <a href ="https://github.com/{{repo['full_name']}}/compare/master...{{parent_user}}:master">{{ repo['files_behind'] }} </td>
+ 
                {% endif %}
+
+               <!-- <td> <a href ="https://github.com/{{repo['full_name']}}/compare/master...{{parent_user}}:master">Detailed Comparison</a></td> -->
+               
              <td> {{ repo['stargazers_count'] }} </td>
              <td> {{ repo['watchers_count'] }} </td>
              <td> {{ repo['forks_count'] }} </td>
