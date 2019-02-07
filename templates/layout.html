@@ -6,18 +6,20 @@
         body {
             padding-top: 3rem;
             padding-bottom: 3rem;
+            padding-left: 3rem;
+            padding-right: 3rem;
+    
         }
         </style>
     </head>
     <body>
-        <div class='container main'>
+        <div class='container'>
             <div class="row">
-                    <div class="form-group">      
+                    <div class="form-group col-lg-12 col-offset-10 centered">      
                         <form action="{{url_for('forks')}}" method="post">
                         <div class="input-group">                            
-                        
-                            <input class="form-control" type="text" name="repo" placeholder="username/repositoryname">
-                                    <span class="input-group-btn">
+                         <input class="form-control centered" type="text" name="repo" placeholder="username/repositoryname">
+                                    <span class="input-group-btn centered">
                                          <input class="btn btn-primary" type = "submit" value = "Find Forks" />
                                     </span>
                                     </form>
@@ -25,13 +27,14 @@
                     </div>
             </div>
             <!-- <div class="panel-body">
-                Enter the GitHub repository to seem its forks
             </div> -->
-        </div>
          
+        </div>
         {% block body %}
         {% endblock %}  
-    </body>
+
+
+     </body>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
