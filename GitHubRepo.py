@@ -10,9 +10,11 @@ class Repository:
         self.repopath = repopath
         self.githublink = 'https://github.com/'+repopath
         self.apilink = 'https://api.github.com/repos/' + repopath
+        print(repopath)
         repoinfo = repopath.split('/')
         self.repoowner =  repoinfo[0]
         self.reponame = repoinfo[1]
+        print(repoinfo)
         
         #self.repoinfoJSON = self.getRepInfoasJSON() 
         #self.forked_count = self.repoinfoJSON['forks_count']
@@ -81,11 +83,11 @@ class Repository:
 
     def getForkedRepos(self):
         #print(self.apilink)
-        self.forkedrespjson = requests.get(self.apilink+'/forks?sort=stargazers&per_page=100').json()
+        self.forkedrespjson = requests.get(self.apilink+'/forks?sort=stargazers&per_page=50').json()
         if('message' in self.forkedrespjson):
             pass
         else: 
-            with Pool(72) as p:
+            with Pool(27) as p:
                 forkedrespjsonitr = p.imap_unordered(self.scrapeRepoInfo,self.forkedrespjson)
                 self.forkedrespjson = [i for i in forkedrespjsonitr if i]
 

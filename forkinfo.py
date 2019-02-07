@@ -16,9 +16,10 @@ def forkedrepos(reponame):
     # for i in range(30):
     #     commitinfodict['repo'+str(random.randint(1,101))] = {'ahead': random.randint(1,101) , 'behind': random.randint(1,101)}
     #return render_template('forks.html', cuur_repo_list= commitinfodict)
-    
+    print(reponame)
     repo_owner = reponame.split('/')[0]
     repoobj = repo(reponame)
+
 
     forked_repos = repoobj.getForkedRepos()
     if 'message' in repoobj.forkedrespjson:
