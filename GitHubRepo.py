@@ -10,24 +10,63 @@ class Repository:
         self.repopath = repopath
         self.githublink = 'https://github.com/'+repopath
         self.apilink = 'https://api.github.com/repos/' + repopath
+        repoinfo = repopath.split('/')
+        self.repoowner =  repoinfo[0]
+        self.reponame = repoinfo[1]
+        
         #self.repoinfoJSON = self.getRepInfoasJSON() 
         #self.forked_count = self.repoinfoJSON['forks_count']
     
+    def scrapeRepoComparisonInfo(self, forked_repo_owner, comparsiontype, commitinfodict):
+        if comparsiontype=='ahead':
+            link = 'https://github.com/' + self.repoowner + '/' +self.reponame+'/compare/master...' + forked_repo_owner +':master'
+        else:
+            link = 'https://github.com/' + forked_repo_owner + '/' +self.reponame+'/compare/master...' + self.repoowner +':master'
+        #r.status_code == 404
+        repohtml = requests.get(link).text
+        reposoup = BeautifulSoup(repohtml, 'lxml')
+        infoelements = reposoup.findAll('span', attrs={'class': 'nolink'})
+
+        if  len(infoelements)>0:
+            if comparsiontype=='ahead':
+                commitinfodict['ahead'] = " ".join(infoelements[0].text.split()[0])
+                commitinfodict['files_ahead'] = " ".join(infoelements[1].text.split()[0])
+            else:
+                commitinfodict['behind'] = " ".join(infoelements[0].text.split()[0])
+                commitinfodict['files_behind'] = " ".join(infoelements[1].text.split()[0])
+        else:
+            if comparsiontype == 'ahead':
+                commitinfodict['ahead'] = '0'
+                commitinfodict['files_ahead'] = '0'
+            else:
+                commitinfodict['behind'] = '0'
+                commitinfodict['files_behind'] = '0'
+
+        return  commitinfodict
+
+
 
     def scrapeRepoInfo(self,repoinfo):
         reponame = repoinfo['full_name']
+        ownername = repoinfo['owner']['login']
+        commitinfodict ={'ahead':-1, 'behind':-1, 'files_ahead':-1 ,'files_behind':-1}
+        
         link='https://github.com/' + reponame
-        commitinfodict ={'ahead':-1, 'behind':-1}       
         repohtml = requests.get(link).text
         reposoup = BeautifulSoup(repohtml, 'lxml')
         diffinfo = reposoup.find('div', attrs={'class': 'branch-infobar'})
+
+
         try:
-            diff_info_line = diffinfo.contents[-1].strip()
-            for infokey in commitinfodict:
-                if str(infokey) in diff_info_line:
-                    commitinfodict[infokey] = diff_info_line.split(infokey)[0].split()[-2]
-                else:
-                    commitinfodict[infokey] = 0
+            commitinfodict = self.scrapeRepoComparisonInfo(ownername, 'behind', commitinfodict)
+            commitinfodict = self.scrapeRepoComparisonInfo(ownername, 'ahead', commitinfodict)
+            # diff_info_line = diffinfo.contents[-1].strip()
+            # for infokey in commitinfodict:
+            #     if str(infokey) in diff_info_line:
+            #         commitinfodict[infokey] = diff_info_line.split(infokey)[0].split()[-2]
+            #     else:
+            #         commitinfodict[infokey] = 0
+        
         except:
             pass
 
@@ -46,9 +85,11 @@ class Repository:
         if('message' in self.forkedrespjson):
             pass
         else: 
-            with Pool(30) as p:
+            with Pool(72) as p:
                 forkedrespjsonitr = p.imap_unordered(self.scrapeRepoInfo,self.forkedrespjson)
                 self.forkedrespjson = [i for i in forkedrespjsonitr if i]
+
+
             # self.commitinfo ={}
             # for repoinfo in self.forkedrespjson:
             #     reponame = repoinfo['full_name']
