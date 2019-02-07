@@ -10,10 +10,8 @@ class Repository:
         self.repopath = repopath
         self.githublink = 'https://github.com/'+repopath
         self.apilink = 'https://api.github.com/repos/' + repopath
-        repoinfo = repopath.split('/')
-        self.repoowner =  repoinfo[0]
-        self.reponame = repoinfo[1]
-        
+        self.repoinfo = repopath.split('/')
+      
         #self.repoinfoJSON = self.getRepInfoasJSON() 
         #self.forked_count = self.repoinfoJSON['forks_count']
     
@@ -69,6 +67,7 @@ class Repository:
 
 
     def scrapeRepoInfo(self,repoinfo):
+        
         reponame = repoinfo['full_name']
         ownername = repoinfo['owner']['login']
         commitinfodict ={'ahead':-1, 'behind':-1, 'files_ahead':-1 ,'files_behind':-1}
@@ -104,9 +103,13 @@ class Repository:
     def getForkedRepos(self):
         #print(self.apilink)
         self.forkedrespjson = requests.get(self.apilink+'/forks?sort=stargazers&per_page=100').json()
+  
+        
         if('message' in self.forkedrespjson):
             pass
         else: 
+            self.repoowner =  self.repoinfo[0]
+            self.reponame = self.repoinfo[1]
             with Pool(50) as p:
                 forkedrespjsonitr = p.imap_unordered(self.scrapeRepoInfo,self.forkedrespjson)
                 self.forkedrespjson = [repo for repo in forkedrespjsonitr if repo]
