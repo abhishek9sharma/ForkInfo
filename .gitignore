@@ -1,5 +1,5 @@
 testresp.txt
-__pycache__/
-.idea/
+__pycache__
+.idea
 github.ipynb
 test_file.py
