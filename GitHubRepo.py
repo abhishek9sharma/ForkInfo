@@ -16,7 +16,7 @@ class Repository:
         #self.forked_count = self.repoinfoJSON['forks_count']
     
 
-    #HAS BUGS
+    
     def scrapeRepoComparisonInfo(self, forked_repo_owner, comparsiontype, commitinfodict, reponame):
         if comparsiontype=='ahead':
             link = 'https://github.com/' + self.repoowner + '/' +reponame+'/compare/master...' + forked_repo_owner +':master'
@@ -113,10 +113,7 @@ class Repository:
             with Pool(50) as p:
                 forkedrespjsonitr = p.imap_unordered(self.scrapeRepoInfo,self.forkedrespjson)
                 self.forkedrespjson = [repo for repo in forkedrespjsonitr if repo]
-            # for i in self.forkedrespjson:
-            #     if i['owner']['login']=='basiccloud':
-            #         self.scrapeRepoInfo(i)
-
+  
             # self.commitinfo ={}
             # for repoinfo in self.forkedrespjson:
             #     reponame = repoinfo['full_name']
@@ -126,6 +123,3 @@ class Repository:
 
 
 
-#repo = Repository('gcushen/hugo-academic')
-#print("No of forks of main repo :" , repo.getRepInfoasJSON()['forks_count'])    
-#print(repo.getForkedRepos())   

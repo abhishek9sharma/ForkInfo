@@ -3,7 +3,6 @@ from GitHubRepo import Repository as repo
 import random
 
 app = Flask(__name__)
-#app.url_map.strict_slashes = False
 
 @app.route("/")
 def index():
