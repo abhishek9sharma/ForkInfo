@@ -24,7 +24,7 @@ def forkedrepos(reponame):
     if 'message' in repoobj.forkedrespjson:
         return render_template('apierror.html', curr_msg = repoobj.forkedrespjson)
     else:
-        return render_template('forksnofile.html', cuur_repo_list= repoobj.forkedrespjson, parent_user = repo_owner)
+        return render_template('forks.html', cuur_repo_list= repoobj.forkedrespjson, parent_user = repo_owner)
     #return render_template('forks.html', cuur_repo_list= repoobj.commitinfo)
  
 @app.route('/forks', methods =['GET','POST'])
