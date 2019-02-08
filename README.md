@@ -3,4 +3,4 @@ A [flask](http://flask.pocoo.org/) web app to get information about forks of a r
 
 [Find Forks Here](https://forkinfo.herokuapp.com)
 
-![Screenshot](screenshot.png "ForkInfo")
+![Screenshot](static/images/screenshot.png "ForkInfo")

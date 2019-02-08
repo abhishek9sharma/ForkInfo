@@ -14,13 +14,25 @@
         </style>
     </head>
     <body>
-        <div class='container'>
+            <div class="card">
+                <div class="card-header text-center">
+                        <h3>
+                            <a href="https://github.com/abhishek9sharma/ForkInfo" class="blue" ALIGN=”left”>
+                                <img src ='/static/images/Octocat.png' alt = 'GitHub Code' class= 'img-fluid' width="75" height="" ALIGN=”left”></img>
+                                Fork Information
+                            </a> 
+                            
+                        </h3>
+                    </div>
+            
+            <div class='card-block'>
+
             <div class="row">
-                    <div class="form-group col-lg-12 col-offset-10 centered">      
+                <div class="form-group col-lg-12 col-offset-2 centered">      
                         <form action="{{url_for('forks')}}" method="post">
                         <div class="input-group">                            
                          <input class="form-control centered" type="text" name="repo" placeholder="username/repositoryname">
-                                    <span class="input-group-btn centered">
+                                    <span class="input-group-btn">
                                          <input class="btn btn-primary" type = "submit" value = "Find Forks" />
                                     </span>
                         </form>
@@ -31,10 +43,12 @@
             </div> -->
          
         </div>
+           
+       
         {% block body %}
         {% endblock %}  
 
-
+    </div>
      </body>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
