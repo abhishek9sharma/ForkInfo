@@ -59,7 +59,7 @@ class Repository:
         else: 
             self.repoowner =  self.repoinfo[0]
             self.reponame = self.repoinfo[1]
-            with Pool(50) as p:
+            with Pool(25) as p:
                 forkedrespjsonitr = p.imap_unordered(self.scrapeRepoInfo,self.forkedrespjson)
                 self.forkedrespjson = [repo for repo in forkedrespjsonitr if repo]
   
