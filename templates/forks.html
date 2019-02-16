@@ -5,8 +5,7 @@
    <table id="forkTable" class = "table col-sm-12 table-sm display">
       <thead>
          <tr>
-              <th> Repository Name</th>
-              
+              <th> Repository Name</th>            
               <th> Created At</th>
               <th> Updated At</th>
               <th> Commits ahead</th>
@@ -16,7 +15,6 @@
               <th> Watchers Count</th>
               <th> Forks Count</th>  
               <th> Open Issues Count</th>  
-                                   
          </tr>
       <thead>
       <tbody>
@@ -29,24 +27,21 @@
              {% if repo['ahead']==-1 %}
                <td>Error Occured</td>
             {% else %}
-            <td>{{ repo['ahead'] }}</td>
-
+               <td>{{ repo['ahead'] }}</td>
              {% endif %}
          
                
             {% if repo['behind']==-1 %}
                   <td>Error Occured</td>
-               {% else %}
+            {% else %}
                <td>{{ repo['behind'] }}</td>
-
-               {% endif %}
+            {% endif %}
 
             {% if repo['behind']==-1 or repo['ahead']==-1 %}
                   <td>Error Occured</td>
-               {% else %}
-               <td> <a href ="https://github.com/{{repo['full_name']}}/compare/master...{{parent_user}}:master">Compare </a></td>
-
-               {% endif %}
+            {% else %}
+                <td> <a href ="https://github.com/{{repo['full_name']}}/compare/master...{{parent_user}}:master">Compare </a></td>
+            {% endif %}
 
               
              <td> {{ repo['stargazers_count'] }} </td>
@@ -55,7 +50,7 @@
              <td> {{ repo['open_issues_count'] }} </td>
             </tr>
        {% endfor %}
-      </tbody><tbody>
+      </tbody>
    </table>
 </div>
 {% endblock %}
