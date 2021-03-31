@@ -1,5 +1,5 @@
 Flask==0.12.2
-lxml==4.1.0
+lxml==4.6.3
 Flask_Session==0.3.1
 requests==2.18.4
 beautifulsoup4==4.7.1
